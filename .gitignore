@@ -1,0 +1,4 @@
+/backend/__pycache__/**
+/frontend/dist/**
+/node_modules
+/wp_react/__pycache__/**
