@@ -14,7 +14,8 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+PROJECT_DIR = os.path.dirname(os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
@@ -38,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'backend',
+    'api',
     'rest_framework',
     'rest_framework.authtoken',
     'webpack_loader',
@@ -63,7 +64,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'wp_react.urls'
+ROOT_URLCONF = 'base.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +82,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'wp_react.wsgi.application'
+WSGI_APPLICATION = 'base.wsgi.application'
 
 
 # Database
@@ -134,12 +135,14 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'frontend/'),
+    os.path.join(PROJECT_DIR, 'frontend/'),
 )
 
 WEBPACK_LOADER = {
     'DEFAULT': {
+        'CACHE': False,
+        'POLL_INTERVAL': 0.1,
         'BUNDLE_DIR_NAME': 'dist/',
-        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+        'STATS_FILE': os.path.join(PROJECT_DIR, 'webpack-stats.json'),
     }
 }

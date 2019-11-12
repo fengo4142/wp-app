@@ -1,13 +1,13 @@
 
 import { combineReducers } from 'redux';
+import { LoginState, LoginAction } from '../constants'
+import authReducer from './auth.reducers'
 
-import { authState, authReducer } from './auth.reducers'
-
-interface IState {
-  auth: authState;
+export interface RootState {
+  auth: LoginState;
 }
 
-const rootReducers = combineReducers<IState>({
+const rootReducers = combineReducers<RootState>({
     auth: authReducer,
 });
 

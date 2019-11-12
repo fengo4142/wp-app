@@ -7,12 +7,10 @@ import CustomSidbar from '../../components/CustomSidebar'
 class CustomLayout extends Component {
   render() {
     return (
-      <div>
         <Switch>
-          <Route path="/login" component={LoginForm} />
+          <Route exact path="/" component={LoginForm} />
           <Route path="/home" component={CustomSidbar} />           
         </Switch>
-      </div>
     );
   }
 }

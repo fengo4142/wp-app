@@ -1,13 +1,30 @@
-import { BaseAction, actionIds } from '../common';
+import { 
+  LoginActionType,
+  LoginRequestPayload,
+  LoginRequestAction,
+  LoginResponse,
+  LoginSuccessAction,
+  LoginErrorPayload,
+  LoginErrorAction,
+} from '../constants';
 
-export const authRequestStartAction = (): BaseAction => ({
-  type: actionIds.GET_NUMBER_REQUEST_START,
-  payload: null,
-});
+export const loginRequest = ({ email, password}: LoginRequestPayload): LoginRequestAction => {
+  return { type: LoginActionType.LOGIN_REQUESTING, email, password, }
+};
 
-export const authRequestCompletedAction = (
-  numberGenerated: number
-): BaseAction => ({
-  type: actionIds.GET_NUMBER_REQUEST_COMPLETED,
-  payload: numberGenerated,
-});
+export const loginSuccess = ({ email, id }: LoginResponse): LoginSuccessAction => {
+  return {
+    type: LoginActionType.LOGIN_SUCCESS,
+    email,
+    id
+  }
+};
+
+export const loginError = ({ error }: LoginErrorPayload): LoginErrorAction => {
+  return {
+    type: LoginActionType.LOGIN_ERROR,
+    error
+  }
+}
+
+

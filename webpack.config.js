@@ -8,7 +8,7 @@ module.exports = {
   entry: path.join(__dirname, 'frontend/src/js/index.tsx'),
 
   output: {
-    path: path.join(__dirname, 'frontend/dist'),
+    path: path.join(__dirname, 'frontend/dist/'),
     filename: '[name]-[hash].js'
   },
   module: {

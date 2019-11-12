@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'semantic-ui-css/semantic.min.css';
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Menu } from 'semantic-ui-react'
 
 class LoginForm extends Component {
   render() {
@@ -27,7 +27,7 @@ class LoginForm extends Component {
             </Segment>
           </Form>
           <Message>
-            New to us? <a href='#'>Sign Up</a>
+            New to us? <Menu.Item as='a' href='/signup'>Sign Up</Menu.Item>
           </Message>
         </Grid.Column>
       </Grid>
