@@ -1,11 +1,11 @@
 from api.serializers import CustomerSerializer
-from api.models import Customer
+from main.models import Customer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 
 
-class BlogView(APIView):
+class CustomerView(APIView):
     def get(self, request, version='v1', format='json'):
         data = CustomerSerializer(
             Customer.objects.all().order_by('-id'), many=True).data

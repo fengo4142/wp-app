@@ -1,4 +1,4 @@
-from .models import Customer
+from main.models import Customer
 from rest_framework import serializers
 
 

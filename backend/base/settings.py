@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'api',
+    'main',
     'rest_framework',
     'rest_framework.authtoken',
     'webpack_loader',
