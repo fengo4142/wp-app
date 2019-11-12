@@ -1,7 +1,11 @@
 /backend/__pycache__/**
 /backend/api/__pycache__/**
 /backend/api/views/__pycache__/**
+/backend/api/migrations/__pycache__/**
 /backend/main/__pycache__/**
+/backend/main/migrations/__pycache__/**
+/backend/base/__pycache__/**
+
 /frontend/dist/**
 /node_modules
 
