@@ -1,3 +1,4 @@
+from datetime import timedelta
 """
 Django settings for wp_react project.
 
@@ -28,12 +29,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+SITE_ID = 1
 
 # Application definition
 
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
+    'django.contrib.sites',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
@@ -42,13 +45,14 @@ INSTALLED_APPS = [
     'api',
     'main',
     'rest_framework',
-    'rest_framework.authtoken',
     'webpack_loader',
 ]
 
+
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # 'rest_framework.authentication.TokenAuthentication',
     ),
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
@@ -146,4 +150,31 @@ WEBPACK_LOADER = {
         'BUNDLE_DIR_NAME': 'dist/',
         'STATS_FILE': os.path.join(PROJECT_DIR, 'webpack-stats.json'),
     }
+}
+
+
+#####
+
+# jwt token settings
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=21),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'VERIFYING_KEY': None,
+
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'USER_ID_FIELD': 'id',
+    'USER_ID_CLAIM': 'user_id',
+
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
+    'TOKEN_TYPE_CLAIM': 'token_type',
+
+    'SLIDING_TOKEN_REFRESH_EXP_CLAIM': 'refresh_exp',
+    'SLIDING_TOKEN_LIFETIME': timedelta(hours=2),
+    'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=21),
 }
