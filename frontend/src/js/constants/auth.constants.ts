@@ -13,7 +13,7 @@ export interface LoginResponse {
 }
 
 export interface LoginRequestPayload {
-  email: string;
+  username_or_email: string;   // username or email
   password: string;
 }
 

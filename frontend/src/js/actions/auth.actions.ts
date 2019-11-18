@@ -8,8 +8,8 @@ import {
   LoginErrorAction,
 } from '../constants';
 
-export const loginRequest = ({ email, password}: LoginRequestPayload): LoginRequestAction => {
-  return { type: LoginActionType.LOGIN_REQUESTING, email, password, }
+export const loginRequest = ({ username_or_email, password}: LoginRequestPayload): LoginRequestAction => {
+  return { type: LoginActionType.LOGIN_REQUESTING, username_or_email, password, }
 };
 
 export const loginSuccess = ({ email, id }: LoginResponse): LoginSuccessAction => {
