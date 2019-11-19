@@ -14,12 +14,14 @@ const reducer: Reducer<LoginState, LoginAction> = (state:LoginState = initialSta
       return {
         ...state,
         requesting: true,
+        successful: false,
         //messages: [{body: 'Logging in...', time: new Date() }],
         messages: []
       };
     case LoginActionType.LOGIN_SUCCESS:
       return {
         ...state,
+        requesting: false,
         successful: true,
       }
     case LoginActionType.LOGIN_ERROR:

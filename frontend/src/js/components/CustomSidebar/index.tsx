@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { logout } from "../../actions/auth.actions";
 import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-interface IProps {
+interface IProps extends RouteComponentProps {
   animation: 'overlay' | 'push' | 'scale down' | 'uncover' | 'slide out' | 'slide along' | undefined,
   direction: 'top' | 'right' | 'bottom' | 'left' | undefined,
   visible: boolean,
@@ -18,6 +19,7 @@ class CustomSidebar extends Component<IProps, IState> {
     dimmed: false,
     visible: true,
   }
+
   render() {
     const { animation, direction, visible, dimmed } = this.state;
     return (
@@ -40,7 +42,7 @@ class CustomSidebar extends Component<IProps, IState> {
             <Icon name='gamepad' />
             Games
           </Menu.Item>
-          <Menu.Item as='a' href='camera'>
+          <Menu.Item as='a' href='#' onClick={ (e) => logout()}>
             <Icon name='camera' />
             Channels
           </Menu.Item>
@@ -56,5 +58,12 @@ class CustomSidebar extends Component<IProps, IState> {
     )
   }
 }
+const mapStateToProps = state => state;
 
-export default CustomSidebar
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomSidebar);

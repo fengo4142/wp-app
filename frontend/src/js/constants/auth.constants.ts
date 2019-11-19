@@ -8,8 +8,8 @@ export enum LoginActionType {
 }
 
 export interface LoginResponse {
-  email: string;
-  id: number;
+  token: string;
+  user: object;
 }
 
 export interface LoginRequestPayload {
@@ -25,7 +25,7 @@ export type LoginRequestAction = ActionWithPayload<LoginActionType.LOGIN_REQUEST
 export type LoginSuccessAction = ActionWithPayload<LoginActionType.LOGIN_SUCCESS, LoginResponse>;
 export type LoginErrorAction = ActionWithPayload<LoginActionType.LOGIN_ERROR, LoginErrorPayload>;
 
-export type LoginAction = LoginRequestAction | LoginSuccessAction | LoginErrorAction;
+export type LoginAction = LoginRequestAction | LoginSuccessAction | LoginErrorAction ;
 
 export interface LoginState {
   requesting: boolean;
