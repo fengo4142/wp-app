@@ -1,69 +1,43 @@
-import React, { Component } from 'react';
-import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import { logout } from "../../actions/auth.actions";
-import { connect } from 'react-redux';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import React from 'react';
+import { SidebarItem } from './SidebarItem';
+import { SidebarHeader } from './SidebarHeader';
+import SidebarLogo from './SidebarLogo';
+import { Menu, Divider } from 'semantic-ui-react';
+import logo from '../../assets/images/8bit-logo.jpg'
+import './style.scss';
 
-interface IProps extends RouteComponentProps {
-  animation: 'overlay' | 'push' | 'scale down' | 'uncover' | 'slide out' | 'slide along' | undefined,
-  direction: 'top' | 'right' | 'bottom' | 'left' | undefined,
-  visible: boolean,
-  dimmed: boolean,
+interface IProps {
+  onClickDrawer(): void;
 }
-interface IState {}
+interface IState {
+  visible: boolean;
+}
 
-class CustomSidebar extends Component<IProps, IState> {
-  state = {
-    animation: 'uncover',
-    direction: 'left',
-    dimmed: false,
-    visible: true,
+export default class CustomSideBar extends React.Component <IProps, IState>{
+  constructor(props: IProps) {
+    super(props)
   }
 
   render() {
-    const { animation, direction, visible, dimmed } = this.state;
+    const { onClickDrawer } = this.props;
     return (
-      <Sidebar.Pushable as={Segment}>      
-        <Sidebar
-          as={Menu}
-          animation='uncover'
-          direction='left'
-          icon='labeled'
-          inverted
-          vertical
-          visible={visible}
-          width='thin'
-        >
-          <Menu.Item as='a' href='/home'>
-            <Icon name='home' />
-            Home
-          </Menu.Item>
-          <Menu.Item as='a' href='/game'>
-            <Icon name='gamepad' />
-            Games
-          </Menu.Item>
-          <Menu.Item as='a' href='#' onClick={ (e) => logout()}>
-            <Icon name='camera' />
-            Channels
-          </Menu.Item>
-        </Sidebar>
-
-        <Sidebar.Pusher dimmed={dimmed && visible}>
-          <Segment basic>
-            <Header as='h3'>Application Content</Header>
-            <Image src='/images/wireframe/paragraph.png' />
-          </Segment>
-        </Sidebar.Pusher>
-      </Sidebar.Pushable>
-    )
+      <Menu borderless vertical stackable fixed='left' className='side-nav'>
+        <SidebarLogo logo={logo} onClickDrawer={onClickDrawer}/>
+        <SidebarItem highlight={true}  label='Home' icon='home'/>
+        <SidebarItem label='Trending' icon='fire'/>
+        <SidebarItem label='Followers' icon='spy'/>
+        <Divider/>
+        <SidebarHeader title='Library'/>
+        <SidebarItem label='History' icon='history'/>
+        <SidebarItem label='Watch later' icon='clock'/>
+        <SidebarItem label='Liked videos' icon='thumbs up'/>
+        <Divider/>
+        <SidebarHeader title='Library'/>
+        <SidebarItem label='Movies and Shows' icon='film'/>
+        <SidebarItem label='Report history' icon='flag'/>
+        <SidebarItem label='Help' icon='help circle'/>
+        <SidebarItem label='Send feedback' icon='comment'/>
+      </Menu>
+    );
   }
 }
-const mapStateToProps = state => state;
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => dispatch(logout())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CustomSidebar);

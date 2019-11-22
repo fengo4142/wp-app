@@ -8,6 +8,7 @@ import CustomLayout from './containers/CustomLayout'
 import LoginForm from './pages/Login'
 import AuthService from './services/auth.service'
 import '../scss/index.scss';
+import Home from './components/Home';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
@@ -32,14 +33,16 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Router history={history}>                  
-          <Switch>
-            <Route exact path="/" component={() => <Redirect to="/home" />} />
-            <Route path="/login" component={LoginForm} />
-            <PrivateRoute path="/home" component={CustomLayout} />        
-          </Switch>
+        <Router history={history}>
+            <Switch>
+              <Route exact path="/" component={() => <Redirect to="/home" />} />
+              <Route path="/login" component={LoginForm} />              
+              <CustomLayout {...this.props}>
+                  <PrivateRoute path="/home" component={Home} />
+              </CustomLayout>
+            </Switch>
         </Router>
-      </Provider>      
+      </Provider>  
     );
   }
 }

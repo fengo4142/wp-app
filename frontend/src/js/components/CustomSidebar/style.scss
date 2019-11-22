@@ -1,0 +1,14 @@
+.ui.menu.fixed.side-nav {
+  background-color: #1b1c1d;
+  overflow-y: auto;
+  padding-bottom: 64px;
+  margin-top: 0px !important;
+
+  .sidebar-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.side-nav.ui.vertical.menu {
+  width: 17rem;
+}

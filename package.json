@@ -7,7 +7,7 @@
     "client:dev": "webpack-dev-server",
     "client:build": "npm run clean && cross-env NODE_ENV=\"production\" webpack",
     "start": "./node_modules/.bin/webpack --config webpack.config.js",
-    "watch": "npm run start -- --watch",
+    "watch": "npm run start -- --watch --hot",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

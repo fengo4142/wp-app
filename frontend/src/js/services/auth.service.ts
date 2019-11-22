@@ -41,8 +41,6 @@ export default class AuthService {
     static isLoggedIn = () => {
       // attempt to grab the token from localstorage
       const storedToken = localStorage.getItem('token')
-
-      console.log(storedToken,"kkk")
       // if it exists
       if (storedToken) {
         // parse it down into an object       
@@ -59,11 +57,9 @@ export default class AuthService {
       setTimeout(() => {
         history.push('/home');        
       }, 1000);
-      console.log('pushed', token)
     }
 
-    static logout() {
-      console.log('dfd')
+    static logout() {    
       localStorage.removeItem('token');
       history.push('/');
     }

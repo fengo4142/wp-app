@@ -1,0 +1,28 @@
+@import '../../../scss/base.scss';
+
+.ui.menu.top-menu {
+  border: none;
+  .logo {
+    width: $sidebar-left-width;
+  }
+}
+
+$sidebar-hover-color: #ebebeb;
+.ui.menu.fixed.side-nav {
+  margin-top: $header-nav-height;
+  padding-bottom: $header-nav-height;
+}
+
+.side-nav.ui.vertical.menu {
+  width: $sidebar-left-width !important;
+}
+
+.ui.thin.left.sidebar, .ui.thin.right.sidebar {
+  width: $sidebar-left-width !important;
+}
+
+.ui.visible.thin.left.sidebar ~ .fixed, 
+.ui.visible.thin.left.sidebar ~ .pusher {
+  -webkit-transform: translate3d($sidebar-left-width, 0, 0) !important;
+  transform: translate3d($sidebar-left-width, 0, 0) !important;
+}
