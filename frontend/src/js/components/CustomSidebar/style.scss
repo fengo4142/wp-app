@@ -1,3 +1,7 @@
+.ui.sidebar {
+  overflow-y: unset !important;
+}
+
 .ui.menu.fixed.side-nav {
   background-color: #1b1c1d;
   overflow-y: auto;
@@ -7,8 +11,4 @@
   .sidebar-item:hover {
     background: rgba(255, 255, 255, 0.08);
   }
-}
-
-.side-nav.ui.vertical.menu {
-  width: 17rem;
 }

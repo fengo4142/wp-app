@@ -5,6 +5,7 @@ import './style.scss';
 
 interface IProps {
   logo: string;
+  minimized: boolean;
   onClickDrawer(): void;
 }
 
@@ -13,12 +14,15 @@ interface IState {}
 export default class SidebarLogo extends React.Component<IProps, IState> {
 
   render() {
-    const { logo, onClickDrawer } = this.props;
+    const { logo, minimized, onClickDrawer } = this.props;
 
     return (
       <Menu.Item header className='logo'>
-        <Link to='/'><Image src={logo} size='tiny'/></Link>
-        <Icon name='list' className='hamburger' onClick={onClickDrawer}></Icon>
+        { !minimized && 
+          <Link className='logo-link' to='/'>
+            <Image className='logo-link__image' src={logo} size='tiny'/>
+          </Link> }
+        <Icon name='list' className='logo-hamburger' onClick={onClickDrawer}></Icon>
       </Menu.Item>
     );
   }

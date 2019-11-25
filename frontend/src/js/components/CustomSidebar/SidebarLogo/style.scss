@@ -1,12 +1,19 @@
-.ui.tiny.image {
-  width: 150px !important;
-}
+
 .logo {
+
   display: flex !important;
+
+  &-link {
+    width: 200px;
+    &__image {
+      width: 150px !important;
+    }
+  }
+  
+  &-hamburger {
+    margin: .75rem 0 0 .5em !important;
+    cursor: pointer;
+    color: #5f5f5f;
+  }
 }
-.hamburger {
-  margin: .75rem 0 0 .5em !important;
-  margin-left: auto !important;
-  cursor: pointer;
-  color: #5f5f5f;
-}
+

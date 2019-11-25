@@ -1,5 +1,5 @@
 // This file contains the sagas used for async actions in our app. It's divided into
-// "effects" that the sagas call (`authorize` and `logout`) and the actual sagas themselves,
+// "effects" and the actual sagas themselves,
 // which listen for actions.
 
 // Sagas help us gather all our side effects (network requests in this case) in one place
@@ -9,6 +9,10 @@ import { LoginActionType, LoginResponse, LoginRequestPayload } from '../constant
 import { loginError } from "../actions";
 import AuthService from '../services/auth.service';
 
+/**
+ * effect to send login request
+ * @param  {string} payload               The username and password of the user
+ */
 export function* loginRequestSaga(payload: LoginRequestPayload) {
   try{
     const response = yield call(AuthService.login, payload);
@@ -20,6 +24,10 @@ export function* loginRequestSaga(payload: LoginRequestPayload) {
   }
 }
 
+/**
+ * saga to call login request
+ * @param  {string} request               The username_or_email and password of the user
+ */
 export function* callLoginRequest(request) {
 
   //const request = yield take(LoginActionType.LOGIN_REQUESTING);

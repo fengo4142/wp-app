@@ -5,7 +5,7 @@ const initialState: LoginState = {
   requesting: false,
   successful: false,
   messages: [],
-  errors: []
+  errors: [],
 }
 
 const reducer: Reducer<LoginState, LoginAction> = (state:LoginState = initialState, action: LoginAction) => {

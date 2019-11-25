@@ -1,6 +1,6 @@
 @import '../../../scss/base.scss';
 
-.ui.menu.top-menu {
+.ui.menu {
   border: none;
   .logo {
     width: $sidebar-left-width;
@@ -16,13 +16,24 @@ $sidebar-hover-color: #ebebeb;
 .side-nav.ui.vertical.menu {
   width: $sidebar-left-width !important;
 }
+.side-nav.ui.vertical.menu.minimized {
+  width: $sidebar-left-width-min !important;
+}
 
-.ui.thin.left.sidebar, .ui.thin.right.sidebar {
+
+.ui.thin.left.sidebar, 
+.ui.thin.right.sidebar {
   width: $sidebar-left-width !important;
 }
+
 
 .ui.visible.thin.left.sidebar ~ .fixed, 
 .ui.visible.thin.left.sidebar ~ .pusher {
   -webkit-transform: translate3d($sidebar-left-width, 0, 0) !important;
   transform: translate3d($sidebar-left-width, 0, 0) !important;
+}
+.ui.visible.thin.left.sidebar.minimized ~ .fixed, 
+.ui.visible.thin.left.sidebar.minimized ~ .pusher {
+  -webkit-transform: translate3d($sidebar-left-width-min, 0, 0) !important;
+  transform: translate3d($sidebar-left-width-min, 0, 0) !important;
 }

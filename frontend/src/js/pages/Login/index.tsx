@@ -16,7 +16,7 @@ interface IMapDispatchToProps {
 
 class LoginForm extends Component<IMapDispatchToProps, IMapStateToProps> {
   constructor(props) {
-    super(props)    
+    super(props)
   }
 
   state = {

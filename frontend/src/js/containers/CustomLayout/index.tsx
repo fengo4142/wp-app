@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { Header, Icon, Image, Menu, Segment, Sidebar, Dropdown } from 'semantic-ui-react';
-import { logout } from "../../actions/auth.actions";
+import { Segment, Sidebar } from 'semantic-ui-react';
+import { drawerOpening } from "../../actions/shared.actions";
 import { connect } from 'react-redux';
 import { RouteComponentProps } from 'react-router-dom';
 import history from "../../utils/historyUtils";
 import CustomSidebar from "../../components/CustomSidebar";
 import './style.scss'
+
 interface IProps extends RouteComponentProps {
   animation: 'overlay' | 'push' | 'scale down' | 'uncover' | 'slide out' | 'slide along' | undefined,
   direction: 'top' | 'right' | 'bottom' | 'left' | undefined,
-  visible: boolean,
-  dimmed: boolean,
+  visible: boolean;
+  minimized: boolean;
+  activeItem: string;
 }
 
 interface IState {
@@ -20,31 +22,12 @@ interface IState {
 }
 
 class CustomLayout extends Component<IProps, IState> {
-  state = {
-    animation: 'uncover',
-    direction: 'left',
-    dimmed: false,
-    visible: true,
-    activeItem: 'home',
-    minimized: false
-  }
-  handleItemClick = (event, { item }) => {
-    this.setState({ activeItem: item.name });
-    history.push(item.name)
-  }
-
-  onClickDrawer = () => {
-    
-    this.setState(prevState => ({ visible: !prevState.visible }));
-    this.setState(prevState => ({ minimized: !prevState.minimized }));
-    setTimeout(() => {
-      this.setState(prevState => ({ visible: !prevState.visible }));
-    }, 500)
-    
+  constructor(props: IProps) {
+    super(props)
   }
 
   render() {
-    const { animation, direction, visible, dimmed, activeItem } = this.state;
+    const { visible, minimized, activeItem } = this.props;
 
     return (
       <Sidebar.Pushable as={Segment}>
@@ -54,10 +37,11 @@ class CustomLayout extends Component<IProps, IState> {
             icon='labeled'
             visible={visible}
             width='thin'
+            className={minimized ? 'minimized' : ''}
           >
-          <CustomSidebar onClickDrawer={this.onClickDrawer}/>   
+          <CustomSidebar minimized={minimized} activeItem={activeItem} />
         </Sidebar>
-        <Sidebar.Pusher dimmed={dimmed && visible}>
+        <Sidebar.Pusher>
           <Segment basic>
             {this.props.children}
           </Segment>
@@ -66,12 +50,11 @@ class CustomLayout extends Component<IProps, IState> {
     )
   }
 }
-const mapStateToProps = state => state;
+const mapStateToProps = state => ({
+  visible: state.shared.visible,
+  minimized: state.shared.minimized,  
+  activeItem: state.shared.activeItem
+});
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    logout: () => dispatch(logout())
-  }
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(CustomLayout);
+export default connect(mapStateToProps, null)(CustomLayout);
