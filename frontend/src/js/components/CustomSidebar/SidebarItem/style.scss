@@ -17,9 +17,30 @@
       color: #f5f5f5;
     }
   }
-}
 
-.sidebar-item-alignment-container {
-  display: flex;
-  align-items: center;
+  &-alignment-container {
+    display: flex;
+    align-items: center;
+    i.arrow-icon {
+      margin-left: auto;
+    }
+  }
+  
+  &-submenu-container {
+    width: 100%;
+    display: none;
+    height: 0;
+    transition: 0.3s all ease;
+    .submenu-item {
+      margin: 0px 0px 0px 25px;
+    }
+
+    &.highlight-item {
+      display: block;
+      height: 100%;
+      transition: 0.3s all ease;
+    }
+  }
+  
+  
 }

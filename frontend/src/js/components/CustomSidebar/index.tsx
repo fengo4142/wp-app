@@ -24,18 +24,27 @@ interface IMapDispatchToProps extends RouteComponentProps<any>{
   activeMenu: (item) => void;
 }
 
-const urlMockData = [
-    { id: 1, name: 'home', path: '/home' },
-    { id: 2, name: 'disk_erasure', path: '/disk_erasure' },
-    { id: 3, name: 'customer', path: '/customer' },
-    { id: 4, name: 'organization', path: '/organization' },
-    { id: 5, name: 'order', path: '/order' },
-    { id: 6, name: 'operation', path: '/operation' },
-    { id: 7, name: 'report', path: '/report' },
-    { id: 8, name: 'setting', path: '/setting' },
-    { id: 9, name: 'status', path: '/status' },
-    { id: 10, name: 'help', path: '/help' },
-    { id: 11, name: 'logout', path: '/logout' },
+const menuList = [
+    { id: 1, name: 'home', path: '/home', label: 'Home', icon: 'home' },
+    { id: 2, name: 'disk_erasure', path: '/disk_erasure', label: 'Client Process', icon: 'television' },
+    { id: 3, name: 'contacts', path: '/contacts', label: 'Contacts', icon: 'user',
+      submenu: [ 
+        { id: 31, name: 'customer', path: '/customer', label: 'Customer', icon: '' },
+        { id: 32, name: 'organization', path: '/organization', label: 'Organization', icon: 'building' },
+      ]
+    },
+    { id: 4, name: 'order', path: '/order', label: 'Order', icon: 'clock' },
+    { id: 5, name: 'operation', label: 'Operation', icon: 'industry', path: '/operation',
+      submenu: [
+        { id: 51, name: 'host', path: '/host', label: 'Host', icon: '' },
+        { id: 52, name: 'queue', path: '/queue', label: 'Queue', icon: '' }
+      ]
+    },
+    { id: 6, name: 'report', path: '/report', label: 'Report', icon: 'chart line' },
+    { id: 7, name: 'setting', path: '/setting', label: 'Setting', icon: 'cogs' },
+    { id: 8, name: 'status', path: '/status', label: 'Status', icon: 'sync alternate' },
+    { id: 9, name: 'help', path: '/help', label: 'Help', icon: 'help circle' },
+    { id: 10, name: 'logout', path: '/logout', label: 'Sign out', icon: 'sign-out' },
 ];
 
 class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProps> {
@@ -49,10 +58,11 @@ class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProp
   
   setActivePath = (pathname: string) => {
 
-    const activePath  = urlMockData.find(item => item.path.startsWith(pathname));
+    const activeMenuItem  = menuList.find(item => item.path.startsWith(pathname) ||
+     (item.submenu && item.submenu.find(subitem => subitem.path.startsWith(pathname))));
     
-    if (activePath !== undefined) {
-      const { name } = activePath;
+    if (activeMenuItem !== undefined) {
+      const { name } = activeMenuItem;
       this.setState({ activeItem: name})
       if (name === 'logout') {
         localStorage.removeItem('token');
@@ -82,24 +92,19 @@ class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProp
       <Menu borderless vertical stackable fixed='left' className='side-nav'>
         <SidebarLogo logo={logo} minimized={minimized} onClickDrawer={drawerOpening} />
 
-        <Divider style={{ margin: '0' }}/>
+        <Divider style={{ margin: '0' }} />
         { !minimized && <SidebarHeader title='Main'/> }
 
-        <SidebarItem name='home' highlight={ activeItem === 'home' ? true : false} label='Home' icon='home'/>
-        <SidebarItem name='disk_erasure' highlight={ activeItem === 'disk_erasure' ? true : false} label='Client Process' icon='television'/>
-        
-        <Divider/>
-        { !minimized && <SidebarHeader title='Local'/> }
-        
-        <SidebarItem name='customer' highlight={ activeItem === 'customer' ? true : false} label='Customer' icon='user'/>
-        <SidebarItem name='organization' highlight={ activeItem === 'organization' ? true : false} label='Organization' icon='building'  />
-        <SidebarItem name='order' highlight={ activeItem === 'order' ? true : false} label='Order' icon='clock' />
-        <SidebarItem name='operation' highlight={ activeItem === 'operation' ? true : false} label='Operation' icon='industry' />
-        <SidebarItem name='report' highlight={ activeItem === 'report' ? true : false} label='Report' icon='chart line'/>
-        <SidebarItem name='setting' highlight={ activeItem === 'setting' ? true : false} label='Setting' icon='cogs'/>
-        <SidebarItem name='status' highlight={ activeItem === 'status' ? true : false} label='Status' icon='sync alternate'/>
-        <SidebarItem name='help' highlight={ activeItem === 'help' ? true : false} label='Help' icon='help circle'/>
-        <SidebarItem name='logout' label='Log out' icon='sign-out'/>
+        {
+          menuList.map(item => {
+            return <SidebarItem name={item.name} 
+              key={item.name}
+              highlight={activeItem === item.name ? true : false}
+              label={item.label} icon={item.icon}
+              subicon={activeItem === item.name ? "angle up" : "angle down"}
+              submenu={item.submenu} />
+          })
+        }
       </Menu>
     );
   }
