@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
-import { logout } from "../../actions/auth.actions";
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 

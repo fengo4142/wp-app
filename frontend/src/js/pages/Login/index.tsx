@@ -36,7 +36,7 @@ class LoginForm extends Component<IMapDispatchToProps, IMapStateToProps> {
           </Header>
           <Form size='large'>
             <Segment stacked>
-              <Form.Input 
+              <Form.Input
                 fluid 
                 icon='user' 
                 iconPosition='left' 

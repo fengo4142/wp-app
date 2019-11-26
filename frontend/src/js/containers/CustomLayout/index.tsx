@@ -12,13 +12,11 @@ interface IProps extends RouteComponentProps {
   direction: 'top' | 'right' | 'bottom' | 'left' | undefined,
   visible: boolean;
   minimized: boolean;
-  activeItem: string;
 }
 
 interface IState {
   visible: boolean;
   minimized: boolean;
-  activeItem: string;
 }
 
 class CustomLayout extends Component<IProps, IState> {
@@ -27,7 +25,7 @@ class CustomLayout extends Component<IProps, IState> {
   }
 
   render() {
-    const { visible, minimized, activeItem } = this.props;
+    const { visible, minimized } = this.props;
 
     return (
       <Sidebar.Pushable as={Segment}>
@@ -39,7 +37,7 @@ class CustomLayout extends Component<IProps, IState> {
             width='thin'
             className={minimized ? 'minimized' : ''}
           >
-          <CustomSidebar minimized={minimized} activeItem={activeItem} />
+          <CustomSidebar minimized={minimized} />
         </Sidebar>
         <Sidebar.Pusher>
           <Segment basic>
@@ -53,8 +51,6 @@ class CustomLayout extends Component<IProps, IState> {
 const mapStateToProps = state => ({
   visible: state.shared.visible,
   minimized: state.shared.minimized,  
-  activeItem: state.shared.activeItem
 });
-
 
 export default connect(mapStateToProps, null)(CustomLayout);

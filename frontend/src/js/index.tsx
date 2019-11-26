@@ -37,8 +37,10 @@ class App extends Component {
             <Switch>
               <Route exact path="/" component={() => <Redirect to="/home" />} />
               <Route path="/login" component={LoginForm} />              
-              <CustomLayout {...this.props}>
+              <CustomLayout>
                   <PrivateRoute path="/home" component={Home} />
+                  <PrivateRoute path="/customer" component={LoginForm} />
+                  <PrivateRoute path="/organization" component={Home} />
               </CustomLayout>
             </Switch>
         </Router>

@@ -7,7 +7,6 @@ import {
   LoginErrorPayload,
   LoginErrorAction,
 } from '../constants';
-import history from "../utils/historyUtils";
 
 export const loginRequest = ({ username_or_email, password}: LoginRequestPayload): LoginRequestAction => {
   return { type: LoginActionType.LOGIN_REQUESTING, username_or_email, password, }
@@ -19,10 +18,4 @@ export const loginSuccess = ({ token, user }: LoginResponse): LoginSuccessAction
 
 export const loginError = ({ error }: LoginErrorPayload): LoginErrorAction => {
   return { type: LoginActionType.LOGIN_ERROR, error }
-}
-
-export const logout = () => {
-  //return { type: LoginActionType.LOGOUT }
-  localStorage.removeItem('token');
-  history.push('/');
 }

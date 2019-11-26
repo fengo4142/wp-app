@@ -1,33 +1,78 @@
 import React from 'react';
+import { Dispatch } from 'redux';
+import { connect } from 'react-redux';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
+
+import { drawerOpening } from '../../actions';
 import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
 import SidebarLogo from './SidebarLogo';
-import { Menu, Divider } from 'semantic-ui-react';
 import logo from '../../assets/images/8bit-logo.jpg'
-import './style.scss';
-import { Dispatch } from 'redux';
-import { connect } from 'react-redux';
-import { drawerOpening, activeMenu } from '../../actions/shared.actions';
 
-interface IMapDispatchToProps {
-  minimized: boolean;
-  activeItem: string;
-  drawerOpening: () => void;
-  activeMenu: () => void;
-}
+import { Menu, Divider } from 'semantic-ui-react';
+import './style.scss';
 
 interface IMapStateToProps {
   minimized: boolean;
   activeItem: string;
 }
 
-class CustomSideBar extends React.Component<IMapDispatchToProps, IMapStateToProps> {
+interface IMapDispatchToProps extends RouteComponentProps<any>{
+  minimized: boolean;
+  logout: () => any;
+  drawerOpening: () => void;
+  activeMenu: (item) => void;
+}
+
+class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProps> {
   constructor(props: IMapDispatchToProps) {
     super(props)
+    this.state = {
+      minimized: false,
+      activeItem: '',
+    }
+  }
+  setActivePath = (pathname: string) => {
+    if (pathname.startsWith('/home')) {
+      this.setState({ activeItem: 'home' });
+    } else if (pathname.startsWith('/customer')) {
+      this.setState({ activeItem: 'customer' });
+    } else if (pathname.startsWith('/disk_erasure')) {
+      this.setState({ activeItem: 'disk_erasure' });
+    } else if (pathname.startsWith('/organization')) {
+      this.setState({ activeItem: 'organization' });
+    } else if (pathname.startsWith('/operation')) {
+      this.setState({ activeItem: 'operation' });
+    } else if (pathname.startsWith('/report')) {
+      this.setState({ activeItem: 'report' });
+    } else if (pathname.startsWith('/setting')) {
+      this.setState({ activeItem: 'setting' });
+    } else if (pathname.startsWith('/status')) {
+      this.setState({ activeItem: 'status' });
+    } else if (pathname.startsWith('/logout')) {
+      localStorage.removeItem('token');
+      this.props.history.push('/')
+      // this.setState({ activeItem: 'home' })
+    } else {
+      this.setState({ activeItem: 'home' })
+      this.props.history.push('/')
+    }
   }
 
+  componentDidMount() {
+    const { pathname } = this.props.history.location;
+    this.setActivePath(pathname);
+  }
+  
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.pathname !== this.props.location.pathname) {
+      this.setActivePath(this.props.location.pathname);
+    }
+  };
+  
   render() {
-    const { minimized, activeItem, drawerOpening } = this.props;
+    const { minimized, drawerOpening } = this.props;
+    const { activeItem } = this.state;
 
     return (
       <Menu borderless vertical stackable fixed='left' className='side-nav'>
@@ -42,33 +87,28 @@ class CustomSideBar extends React.Component<IMapDispatchToProps, IMapStateToProp
         <Divider/>
         { !minimized && <SidebarHeader title='Local'/> }
         
-        <SidebarItem name='customer' highlight={ activeItem === 'customer' ? true : false} label='Customer' icon='user' onClickMenu={activeMenu} />
-        <SidebarItem name='orgnization' highlight={ activeItem === 'organization' ? true : false} label='Organization' icon='building' onClickMenu={activeMenu} />
-        <SidebarItem name='order' highlight={ activeItem === 'order' ? true : false} label='Order' icon='clock' onClickMenu={activeMenu} />
+        <SidebarItem name='customer' highlight={ activeItem === 'customer' ? true : false} label='Customer' icon='user'/>
+        <SidebarItem name='organization' highlight={ activeItem === 'organization' ? true : false} label='Organization' icon='building'  />
+        <SidebarItem name='order' highlight={ activeItem === 'order' ? true : false} label='Order' icon='clock' />
         <SidebarItem name='operation' highlight={ activeItem === 'operation' ? true : false} label='Operation' icon='industry' />
         <SidebarItem name='report' highlight={ activeItem === 'report' ? true : false} label='Report' icon='chart line'/>
         <SidebarItem name='setting' highlight={ activeItem === 'setting' ? true : false} label='Setting' icon='cogs'/>
         <SidebarItem name='status' highlight={ activeItem === 'status' ? true : false} label='Status' icon='sync alternate'/>
         <SidebarItem name='help' highlight={ activeItem === 'help' ? true : false} label='Help' icon='help circle'/>
-        <SidebarItem label='Log out' icon='sign-out'/>
+        <SidebarItem name='logout' label='Log out' icon='sign-out'/>
       </Menu>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  minimized: state.shared.minimized,
-  activeItem: state.shared.activeItem
+  minimized: state.shared.minimized
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    drawerOpening: () => { dispatch(drawerOpening())},
-    activeMenu: () => {
-      const item: any = '';
-      dispatch(activeMenu(item))
-    }
+    drawerOpening: () => { dispatch(drawerOpening()) }
   }
 }
 
-export default connect<IMapStateToProps, IMapDispatchToProps, {}>(mapStateToProps, mapDispatchToProps)(CustomSideBar);
+export default connect<IMapStateToProps, IMapDispatchToProps, {}>(mapStateToProps, mapDispatchToProps)(withRouter(CustomSidebar));
