@@ -36,11 +36,11 @@ class App extends Component {
         <Router history={history}>
             <Switch>
               <Route exact path="/" component={() => <Redirect to="/home" />} />
-              <Route path="/login" component={LoginForm} />              
+              <Route exact path="/login" component={LoginForm} />              
               <CustomLayout>
-                  <PrivateRoute path="/home" component={Home} />
-                  <PrivateRoute path="/customer" component={LoginForm} />
-                  <PrivateRoute path="/organization" component={Home} />
+                  <PrivateRoute exact path="/home" component={Home} />
+                  <PrivateRoute exact path="/customer" component={LoginForm} />
+                  <PrivateRoute exact path="/organization" component={Home} />
               </CustomLayout>
             </Switch>
         </Router>

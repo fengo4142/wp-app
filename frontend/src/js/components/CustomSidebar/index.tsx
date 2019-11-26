@@ -24,38 +24,42 @@ interface IMapDispatchToProps extends RouteComponentProps<any>{
   activeMenu: (item) => void;
 }
 
+const urlMockData = [
+    { id: 1, name: 'home', path: '/home' },
+    { id: 2, name: 'disk_erasure', path: '/disk_erasure' },
+    { id: 3, name: 'customer', path: '/customer' },
+    { id: 4, name: 'organization', path: '/organization' },
+    { id: 5, name: 'order', path: '/order' },
+    { id: 6, name: 'operation', path: '/operation' },
+    { id: 7, name: 'report', path: '/report' },
+    { id: 8, name: 'setting', path: '/setting' },
+    { id: 9, name: 'status', path: '/status' },
+    { id: 10, name: 'help', path: '/help' },
+    { id: 11, name: 'logout', path: '/logout' },
+];
+
 class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProps> {
   constructor(props: IMapDispatchToProps) {
     super(props)
     this.state = {
       minimized: false,
-      activeItem: '',
+      activeItem: 'home',
     }
   }
+  
   setActivePath = (pathname: string) => {
-    if (pathname.startsWith('/home')) {
-      this.setState({ activeItem: 'home' });
-    } else if (pathname.startsWith('/customer')) {
-      this.setState({ activeItem: 'customer' });
-    } else if (pathname.startsWith('/disk_erasure')) {
-      this.setState({ activeItem: 'disk_erasure' });
-    } else if (pathname.startsWith('/organization')) {
-      this.setState({ activeItem: 'organization' });
-    } else if (pathname.startsWith('/operation')) {
-      this.setState({ activeItem: 'operation' });
-    } else if (pathname.startsWith('/report')) {
-      this.setState({ activeItem: 'report' });
-    } else if (pathname.startsWith('/setting')) {
-      this.setState({ activeItem: 'setting' });
-    } else if (pathname.startsWith('/status')) {
-      this.setState({ activeItem: 'status' });
-    } else if (pathname.startsWith('/logout')) {
-      localStorage.removeItem('token');
-      this.props.history.push('/')
-      // this.setState({ activeItem: 'home' })
+
+    const activePath  = urlMockData.find(item => item.path.startsWith(pathname));
+    
+    if (activePath !== undefined) {
+      const { name } = activePath;
+      this.setState({ activeItem: name})
+      if (name === 'logout') {
+        localStorage.removeItem('token');
+        this.props.history.push('/');
+      }
     } else {
-      this.setState({ activeItem: 'home' })
-      this.props.history.push('/')
+      this.props.history.push('/');
     }
   }
 
@@ -82,7 +86,7 @@ class CustomSidebar extends React.Component<IMapDispatchToProps, IMapStateToProp
         { !minimized && <SidebarHeader title='Main'/> }
 
         <SidebarItem name='home' highlight={ activeItem === 'home' ? true : false} label='Home' icon='home'/>
-        <SidebarItem name='disk_erasure' highlight={ activeItem === 'process' ? true : false} label='Client Process' icon='television'/>
+        <SidebarItem name='disk_erasure' highlight={ activeItem === 'disk_erasure' ? true : false} label='Client Process' icon='television'/>
         
         <Divider/>
         { !minimized && <SidebarHeader title='Local'/> }

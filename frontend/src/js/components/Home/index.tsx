@@ -18,7 +18,7 @@ class Home extends Component<IProps, IState> {
       <Segment basic>
         <Header as='h3'>Application Content Home</Header>
         <Image src='/images/wireframe/paragraph.png' />
-      </Segment>        
+      </Segment>
     )
   }
 }
