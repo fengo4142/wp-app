@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { Provider } from 'react-redux';
+
 import store from "./store";
 import history from "./utils/historyUtils";
+
+import AuthService from './services/auth.service'
 import CustomLayout from './containers/CustomLayout'
 import LoginForm from './pages/Login'
-import AuthService from './services/auth.service'
+import Home from './pages/Home';
 import '../scss/index.scss';
-import Home from './components/Home';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   return (
