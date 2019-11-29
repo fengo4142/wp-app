@@ -41,6 +41,8 @@
     "webpack-cli": "^3.3.9"
   },
   "dependencies": {
+    "@ag-grid-community/all-modules": "^22.0.0",
+    "@ag-grid-community/react": "^22.0.0",
     "@ngrx/store": "^8.5.0",
     "@types/jest": "^24.0.21",
     "@types/node": "^12.12.5",

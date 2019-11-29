@@ -1,40 +1,100 @@
 import React, { Component } from 'react';
-import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react';
+import { Header, Grid, Segment, Responsive } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
+import DashboardGrid from '../../components/DashboardGrid'
+
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import HeaderBreadcrumb from '../../components/HeaderBreadcrumb';
 
 const options: Highcharts.Options  = {
     title: {
-        text: 'My chart'
+        text: 'Annual Report'
+    },    
+    chart: {
+        height: 350,
+    },
+    plotOptions: {    
+      pie: {
+        allowPointSelect: true,
+        showInLegend: true,
+        cursor: 'pointer',
+        innerSize: "60%",
+        dataLabels: {
+          enabled: false
+        }
+      }
     },
     series: [{
-        type: 'line',
-        data: [1, 2, 3]
-    }]
+        type: 'pie',                
+        data: [
+          {
+            y: 100
+          },
+          {
+            y: 50
+          }
+        ]
+    }],
+    legend: {
+      align: "right",
+      x: -50,
+      verticalAlign: "middle",
+      layout: "vertical",
+      enabled: true,
+      floating: true,
+      y: 120
+    }
+  
 }
 
 interface IProps extends RouteComponentProps {}
 
-interface IState {}
+interface IState {
+  columnDefs: object;
+  rowData: object;
+}
 
 class Home extends Component<IProps, IState> {
-  state = {
-  
+  constructor(props: IProps) {
+    super(props);
   }
-
   render() {
-   
     return (
-      <Segment basic>
-        <Header as='h3'>Application Content Home</Header>
-        <HighchartsReact
-          highcharts={Highcharts}
-          options={options}
-        />
-      </Segment>
+       <Grid>
+         <Grid.Row columns={2}>
+           <Grid.Column>
+              <HeaderBreadcrumb />
+           </Grid.Column>
+         </Grid.Row>
+         <Grid.Row>
+           <Grid.Column mobile={16} computer={8}>
+             <Segment>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={options}
+              />
+              </Segment>
+          </Grid.Column>
+          <Grid.Column mobile={16} computer={8}>
+            <Segment>
+              <HighchartsReact
+                highcharts={Highcharts}
+                options={options}
+              />
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column columns={1}>
+            <Segment className="ag-theme-balham" style={{ height: '300px' }}>            
+                <DashboardGrid />
+            </Segment>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
     )
   }
 }

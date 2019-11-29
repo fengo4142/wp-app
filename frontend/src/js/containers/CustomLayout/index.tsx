@@ -28,7 +28,7 @@ class CustomLayout extends Component<IProps, IState> {
     const { visible, minimized } = this.props;
 
     return (
-      <Sidebar.Pushable as={Segment}>
+      <Sidebar.Pushable as={Segment} className="custom-layout">
          <Sidebar
             animation='uncover'
             direction='left'
@@ -39,8 +39,8 @@ class CustomLayout extends Component<IProps, IState> {
           >
           <CustomSidebar minimized={minimized} />
         </Sidebar>
-        <Sidebar.Pusher>
-          <Segment basic>
+        <Sidebar.Pusher className='custom-layout-main-container'>
+          <Segment basic >
             {this.props.children}
           </Segment>
         </Sidebar.Pusher>

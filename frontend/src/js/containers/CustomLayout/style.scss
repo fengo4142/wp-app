@@ -1,5 +1,12 @@
 @import '../../../scss/base.scss';
 
+.custom-layout {
+  &-main-container {
+    width: calc(100% - #{$sidebar-left-width});
+  }
+}
+
+
 .ui.menu {
   border: none;
   .logo {
