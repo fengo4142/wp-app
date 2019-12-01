@@ -1,0 +1,18 @@
+.process-step {
+  &__group {
+    margin: 0.25em 0 !important;
+    &--each {
+      flex: none !important;
+      padding: 0.375em 2em !important;
+      i {
+        font-size: 1.75em !important;
+        opacity: 0.35;
+      }
+      &.completed {
+        i {
+          font-size: 1.75em !important;
+        }
+      }
+    }
+  }
+}

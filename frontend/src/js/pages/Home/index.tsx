@@ -11,11 +11,17 @@ import HeaderBreadcrumb from '../../components/HeaderBreadcrumb';
 
 const options: Highcharts.Options  = {
     title: {
-        text: 'Annual Report'
+        text: 'Annual Report',
+        verticalAlign:'middle',
+        align: 'center'
     },    
     chart: {
-        height: 350,
+        height: 300,
     },
+    credits: {
+      enabled: false
+    },
+    colors: ['#96D5DF', '#FAD331', '#C1A0C5', '#1BA8BB', '#C5D930',  ],
     plotOptions: {    
       pie: {
         allowPointSelect: true,
@@ -28,14 +34,10 @@ const options: Highcharts.Options  = {
       }
     },
     series: [{
-        type: 'pie',                
+        type: 'pie',       
         data: [
-          {
-            y: 100
-          },
-          {
-            y: 50
-          }
+          { y: 100 },
+          { y: 50 }
         ]
     }],
     legend: {
@@ -63,20 +65,20 @@ class Home extends Component<IProps, IState> {
   }
   render() {
     return (
-       <Grid>
-         <Grid.Row columns={1}>
-           <Grid.Column>
+      <Grid>
+        <Grid.Row columns={1}>
+          <Grid.Column>
               <HeaderBreadcrumb />
-           </Grid.Column>
-         </Grid.Row>
-         <Grid.Row columns={2}>
-           <Grid.Column mobile={16} computer={8}>
-             <Segment>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row columns={2}>
+          <Grid.Column mobile={16} computer={8}>
+            <Segment>
               <HighchartsReact
                 highcharts={Highcharts}
                 options={options}
               />
-              </Segment>
+            </Segment>
           </Grid.Column>
           <Grid.Column mobile={16} computer={8}>
             <Segment>
@@ -89,8 +91,8 @@ class Home extends Component<IProps, IState> {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column columns={1}>
-            <Segment className="ag-theme-balham" style={{ height: '300px' }}>            
-                <HomeGrid />
+            <Segment className="ag-theme-balham" style={{ height: '400px' }}>            
+              <HomeGrid />
             </Segment>
           </Grid.Column>
         </Grid.Row>

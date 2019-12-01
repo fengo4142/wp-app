@@ -1,0 +1,39 @@
+.hdd-container {
+  padding: 1em 2em !important;
+  &__column {
+    @media (max-width: 992px) {
+      margin-top: 25px !important;
+    }
+  }
+  &__segments {
+    @media (min-width: 992px) and (max-width: 1201px) {
+      order: 1;
+      margin-top: 25px !important;
+    }
+    &-wrapper {
+      padding: 0 !important;      
+    }
+    &__group {
+      margin: 0 !important;    
+      &--btn {
+        display: grid !important;
+        &-wrapper {
+          margin: auto !important;
+          button {
+            line-height: 5.75em !important; 
+            min-width: 100px !important;
+          }
+        }
+      }
+    }
+    &--host {
+      margin: auto !important;
+    }
+  }
+
+  .pane-hidden {
+    display: none;
+  }
+  
+   
+}
