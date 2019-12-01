@@ -12,7 +12,7 @@ interface IState {
   rowData:  any[];
 }
 
-class DashboardGrid extends React.Component<IProps, IState> {
+class HomeGrid extends React.Component<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -44,4 +44,4 @@ class DashboardGrid extends React.Component<IProps, IState> {
   }
 }
 
-export default DashboardGrid;
+export default HomeGrid;

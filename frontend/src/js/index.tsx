@@ -9,6 +9,7 @@ import history from "./utils/historyUtils";
 import AuthService from './services/auth.service'
 import CustomLayout from './containers/CustomLayout'
 import LoginForm from './pages/Login'
+import ClientProcess from './pages/ClientProcess'
 import Home from './pages/Home';
 import '../scss/index.scss';
 
@@ -41,6 +42,7 @@ class App extends Component {
               <Route exact path="/login" component={LoginForm} />              
               <CustomLayout>
                   <PrivateRoute exact path="/home" component={Home} />
+                  <PrivateRoute exact path="/client_process" component={ClientProcess} />
                   <PrivateRoute exact path="/customer" component={LoginForm} />
                   <PrivateRoute exact path="/organization" component={Home} />
               </CustomLayout>

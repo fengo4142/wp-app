@@ -3,7 +3,7 @@ import { Header, Grid, Segment, Responsive } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 
-import DashboardGrid from '../../components/DashboardGrid'
+import HomeGrid from '../../components/HomeGrid'
 
 import * as Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -64,12 +64,12 @@ class Home extends Component<IProps, IState> {
   render() {
     return (
        <Grid>
-         <Grid.Row columns={2}>
+         <Grid.Row columns={1}>
            <Grid.Column>
               <HeaderBreadcrumb />
            </Grid.Column>
          </Grid.Row>
-         <Grid.Row>
+         <Grid.Row columns={2}>
            <Grid.Column mobile={16} computer={8}>
              <Segment>
               <HighchartsReact
@@ -90,7 +90,7 @@ class Home extends Component<IProps, IState> {
         <Grid.Row>
           <Grid.Column columns={1}>
             <Segment className="ag-theme-balham" style={{ height: '300px' }}>            
-                <DashboardGrid />
+                <HomeGrid />
             </Segment>
           </Grid.Column>
         </Grid.Row>

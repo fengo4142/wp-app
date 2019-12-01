@@ -7,7 +7,7 @@ import { drawerOpening } from '../../actions';
 import { SidebarItem } from './SidebarItem';
 import { SidebarHeader } from './SidebarHeader';
 import SidebarLogo from './SidebarLogo';
-import logo from '../../assets/images/8bit-logo.jpg'
+import logo from '../../assets/images/logo_white.png'
 
 import { Menu, Divider } from 'semantic-ui-react';
 import './style.scss';
@@ -26,7 +26,7 @@ interface IMapDispatchToProps extends RouteComponentProps<any>{
 
 const menuList = [
     { id: 1, name: 'home', path: '/home', label: 'Home', icon: 'home' },
-    { id: 2, name: 'disk_erasure', path: '/disk_erasure', label: 'Client Process', icon: 'television' },
+    { id: 2, name: 'client_process', path: '/client_process', label: 'Client Process', icon: 'television' },
     { id: 3, name: 'contacts', path: '/contacts', label: 'Contacts', icon: 'user',
       submenu: [ 
         { id: 31, name: 'customer', path: '/customer', label: 'Customer', icon: '' },

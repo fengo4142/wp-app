@@ -31,8 +31,8 @@ class LoginForm extends Component<IMapDispatchToProps, IMapStateToProps> {
     return (
       <Grid textAlign='center' style={{ height: '100vh' }} verticalAlign='middle'>
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as='h2' color='teal' textAlign='center'>
-            <Image src='/logo.png' /> Sign In
+          <Header as='h2' textAlign='center'>
+            Sign In
           </Header>
           <Form size='large'>
             <Segment stacked>
@@ -54,7 +54,7 @@ class LoginForm extends Component<IMapDispatchToProps, IMapStateToProps> {
                 onChange={ event => this.setState({ password: event.target.value })}
               />
 
-              <Button color='teal' fluid size='large' onClick={ event => loginRequest({ username_or_email, password })}>
+              <Button color='blue' fluid size='large' onClick={ event => loginRequest({ username_or_email, password })}>
                 Login
               </Button>
             </Segment>

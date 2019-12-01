@@ -14,6 +14,11 @@ declare interface Message {
   time: Date;
   body: string;
 }
+declare module "*.png" {
+  const value: any;
+  export default value;
+}
+
 declare module "*.jpg" {
   const value: any;
   export default value;
