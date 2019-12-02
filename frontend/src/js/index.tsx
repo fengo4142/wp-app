@@ -6,10 +6,11 @@ import { Provider } from 'react-redux';
 import store from "./store";
 import history from "./utils/historyUtils";
 
-import AuthService from './services/auth.service'
-import CustomLayout from './containers/CustomLayout'
-import LoginForm from './pages/Login'
-import ClientProcess from './pages/ClientProcess'
+import AuthService from './services/auth.service';
+import CustomLayout from './containers/CustomLayout';
+import LoginForm from './pages/Login';
+import Customer from './pages/Contacts/Customer';
+import ClientProcess from './pages/ClientProcess';
 import Home from './pages/Home';
 import '../scss/index.scss';
 
@@ -43,8 +44,8 @@ class App extends Component {
               <CustomLayout>
                   <PrivateRoute exact path="/home" component={Home} />
                   <PrivateRoute exact path="/client_process" component={ClientProcess} />
-                  <PrivateRoute exact path="/customer" component={LoginForm} />
-                  <PrivateRoute exact path="/organization" component={Home} />
+                  <PrivateRoute exact path="/customer" component={Customer} />
+                  <PrivateRoute exact path="/organization" component={Customer} />
               </CustomLayout>
             </Switch>
         </Router>

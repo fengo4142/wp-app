@@ -7,18 +7,18 @@ class Hddportlet extends React.Component {
   }
   render() {
     const data = [
-      { name: 'hdd-1', status: true, passed: true, },
-      { name: 'hdd-2', status: false, passed: false, },
-      { name: 'hdd-3', status: true, passed: true, },
-      { name: 'hdd-4', status: false, passed: false, }
+      { name: 'hdd-1', serial: 'DF532S34', status: true, passed: true, },
+      { name: 'hdd-2', serial: 'GK3436L3', status: false, passed: false, },
+      { name: 'hdd-3', serial: 'SL3535L2', status: true, passed: true, },
+      { name: 'hdd-4', serial: 'JK534K34', status: false, passed: false, }
     ]
     const cards = data.map(item => {
       return (
         <Card key={item.name} color={item.status ? 'green' : 'red'}>
           <Card.Content header={item.name} />
-          <Card.Content description={item.passed ? 'PASSED' : 'FAILED'} />
+          <Card.Content description={item.serial} />
           <Card.Content extra>
-            <Icon name='user' />4 users
+            <Icon name={item.passed ? 'check' : 'close'} color={item.passed ? 'green' : 'red'} />{item.passed ? 'PASSED' : 'FAILED'}
           </Card.Content>
         </Card>
       )
